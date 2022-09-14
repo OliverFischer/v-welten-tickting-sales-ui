@@ -1,0 +1,224 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model kostenstelle {
+
+    id          Int      @id @default(autoincrement())
+    erzeugt_am  DateTime @default(now())
+    deleted     Int
+    optlock     Int
+    kostenstelle String
+
+    reservierung reservierung[]
+}
+
+model Unternehmen {
+
+  id          Int      @id @default(autoincrement())
+  name        String
+  beschreibung String?
+  erzeugt_am  DateTime @default(now())
+  optlock     Int
+  Marke       Marke[]
+}
+
+model Marke {
+  Unternehmen    Unternehmen @relation(fields: [unternehmen_id], references: [id])
+  unternehmen_id Int
+
+  id                   Int                    @id @default(autoincrement())
+  name                 String
+  beschreibung          String?
+  erzeugt_am           DateTime               @default(now())
+  optlock              Int
+  Sponsoringaktivitaet Sponsoringaktivitaet[]
+}
+
+model Sponsoringaktivitaet {
+
+  veranstaltungsort String
+  Marke             Marke  @relation(fields: [marke_id], references: [id])
+  marke_id          Int
+
+  id          Int      @id @default(autoincrement())
+  name        String
+  beschreibung String?
+  erzeugt_am  DateTime @default(now())
+  optlock     Int
+
+  veranstaltung veranstaltung[]
+}
+
+model veranstaltung {
+
+  veranstaltungsdatum         DateTime
+  Sponsoringktivitaet         Sponsoringaktivitaet @relation(fields: [sponsoringaktivitaet_id], references: [id])
+  sponsoringaktivitaet_id     Int
+  datum_steht_nicht_fest      Boolean
+
+  id          Int      @id @default(autoincrement())
+  name        String
+  beschreibung String?
+  erzeugt_am  DateTime @default(now())
+  optlock     Int
+
+  veranstaltung_kartenkontingent veranstaltung_kartenkontingent[]
+  
+  reservierung reservierung[]
+}
+
+model kartenkontingent {
+  id                             Int                          @id @unique(map: "id") @default(autoincrement())
+  erzeugt_am                     DateTime                        @db.DateTime(0)
+  optlock                        Int?
+  kartenanzahl                   Int
+  kosten_catering                Float?
+  kosten_karte                   Float
+  sitzkategorie_id               Int
+  sitzkategorie                  sitzkategorie                   @relation(fields: [sitzkategorie_id], references: [id], onUpdate: Restrict, map: "FKC8D27FF4399C4F3B")
+  veranstaltung_kartenkontingent veranstaltung_kartenkontingent?
+
+  @@index([sitzkategorie_id], map: "FKC8D27FF4399C4F3B")
+}
+
+model veranstaltung_kartenkontingent {
+  veranstaltung_id    Int
+  kartenkontingent_id Int           @unique(map: "kartenkontingent_id")
+  kartenkontingent    kartenkontingent @relation(fields: [kartenkontingent_id], references: [id], onUpdate: Restrict, map: "FKE0EA75DD4CA91939")
+  veranstaltung       veranstaltung    @relation(fields: [veranstaltung_id], references: [id], onUpdate: Restrict, map: "FKE0EA75DD67A4A65B")
+
+  @@id([veranstaltung_id, kartenkontingent_id])
+  @@index([kartenkontingent_id], map: "FKE0EA75DD4CA91939")
+  @@index([veranstaltung_id], map: "FKE0EA75DD67A4A65B")
+}
+
+model sitzkategorie {
+  id               Int                 @id @default(autoincrement())
+  erzeugt_am       DateTime           @db.DateTime(0)
+  optlock          Int?
+  beschreibung     String?            @db.VarChar(1024)
+  name             String?            @unique(map: "name") @db.VarChar(255)
+  kartenkontingent kartenkontingent[]
+  reservierung     reservierung[]
+}
+
+model position {
+  id           Int        @id @default(autoincrement())
+  erzeugt_am   DateTime   @db.DateTime(0)
+  optlock      Int?
+  beschreibung String?    @db.VarChar(1024)
+  name         String?    @unique(map: "name") @db.VarChar(255)
+  besucher     besucher[]
+}
+
+model besucher {
+  id            Int      @id @unique(map: "ID") @default(autoincrement())
+  erzeugt_am    DateTime @db.DateTime(0)
+  optlock       Int?
+  hausnummer    String?  @db.VarChar(10)
+  ort           String?  @db.VarChar(35)
+  plz           Int?
+  strasse       String?  @db.VarChar(35)
+  anrede        String   @db.VarChar(255)
+  firma         String?  @db.VarChar(255)
+  nachname      String   @db.VarChar(30)
+  objekt_nummer String?  @db.VarChar(255)
+  telefonnummer String?  @db.VarChar(255)
+  vorname       String?  @db.VarChar(30)
+  position_id   Int      @default(10)
+  position      position @relation(fields: [position_id], references: [id], onUpdate: Restrict, map: "FK9C8B1F37F65DEE5E")
+
+  reservierung  reservierung[]
+
+  @@index([position_id], map: "FK9C8B1F37F65DEE5E")
+}
+
+model reservierung {
+  id                            Int                         @id @unique(map: "id") @default(autoincrement())
+  erzeugt_am                    DateTime                    @db.DateTime(0)
+  optlock                       Int?
+  anzahl_besucher_karten        Int
+  anzahl_betreuer_karten        Int?
+  einladungsgrund               String                      @default("kein ADM - Kommentar") @db.VarChar(1024)
+  gebucht                       Boolean?                    @db.Bit(1)
+  reservierung_eingegangen_am   DateTime                    @db.Date
+  aussendienstmitarbeiter_id    Int
+  besucher_id                   Int
+  besucher                      besucher                    @relation(fields: [besucher_id], references: [id])
+  kostenstelle_id               Int
+  kostenstelle                  kostenstelle                @relation(fields: [kostenstelle_id], references: [id])
+  sitzkategorie_id              Int
+  sitzkategorie                 sitzkategorie               @relation(fields: [sitzkategorie_id], references: [id])
+  veranstaltung_id              Int
+  veranstaltung                 veranstaltung               @relation(fields: [veranstaltung_id], references: [id])
+  zu_absage_per_mail_verschickt Boolean?                    @db.Bit(1)
+  
+
+
+}
+
+model benutzer {
+  id                              Int                       @id @unique(map: "ID") @default(autoincrement())
+  erzeugt_am                      DateTime                  @db.DateTime(0)
+  optlock                         Int?
+  anrede                          String                    @db.VarChar(255)
+  konto_abgelaufen                Boolean?                  @db.Bit(1)
+  konto_freigegeben               Boolean?                  @db.Bit(1)
+  konto_gesperrt                  Boolean?                  @db.Bit(1)
+  benutzer_name                   String                    @unique(map: "BENUTZER_NAME") @db.VarChar(25)
+  email                           String                    @db.VarChar(255)
+  fehlgeschlagene_anmeldeversuche Int?
+  mobilfunknummer                 String?                   @db.VarChar(25)
+  nachname                        String                    @db.VarChar(255)
+  passwort                        String                    @db.VarChar(40)
+  passwort_erinnerung             String?                   @db.VarChar(125)
+  vorname                         String                    @db.VarChar(255)
+  zugangsdaten_abgelaufen         Boolean?                  @db.Bit(1)
+  email_original                  String                    @default("n.v.") @db.VarChar(255)
+  personalnummer                  String?                   @default("0") @db.VarChar(6)
+}
+
+
+model BuchbareVeranstaltungen {
+
+    vId                     Int     @id
+    sId                     Int
+    uId                     Int
+    mId                     Int
+    vName                   String
+    sName                   String
+    uName                   String
+    mName                   String
+    vBeschreibung           String
+    vDatum                  DateTime
+    vBlnDatumIstFix         Boolean
+    vOrt                    String
+    sBeschreibung           String?
+
+}
+
+model eventsabheute {
+
+    id                                      Int     @id
+    key                                     String
+    sponsoringaktivitaet_id                 Int
+    unternehmen_id                          Int
+    marke_id                                Int
+    name                                    String
+    sponsoringaktivitaet_name               String
+    unternehmen_name                        String
+    marke_name                              String
+    beschreibung                            String
+    veranstaltungsdatum                     String?
+    datum_steht_nicht_fest                  Boolean
+    veranstaltungsort                       String
+    sponsoringaktivitaet_beschreibung       String
+}

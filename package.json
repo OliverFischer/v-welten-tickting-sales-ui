@@ -1,0 +1,64 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev | pino-pretty",
+    "build": "next build",
+    "start": "next start",
+    "seed": "node prisma/seed.js",
+    "test": "jest --watch"
+  },
+  "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@hookform/error-message": "latest",
+    "@hookform/resolvers": "latest",
+    "@material-ui/core": "latest",
+    "@mui/material": "latest",
+    "@mui/styles": "latest",
+    "@mui/x-data-grid": "latest",
+    "@prisma/client": "latest",
+    "formik": "latest",
+    "mui-datatables": "latest",
+    "next": "latest",
+    "node-cache": "latest",
+    "pino": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hook-form": "latest",
+    "rxjs": "latest",
+    "sharp": "latest",
+    "swr": "^1.3.0",
+    "yup": "latest"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "autoprefixer": "latest",
+    "jest": "latest",
+    "jest-environment-jsdom": "latest",
+    "postcss": "latest",
+    "prisma": "latest",
+    "tailwindcss": "latest"
+  },
+  "name": "v-welten-ticketing",
+  "version": "0.0.2",
+  "description": "Ticketing App for Carlsberg Holsten",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OliverFischer/v-welten-ticketing.git"
+  },
+  "keywords": [
+    "ticketing",
+    "sponsoring",
+    "event"
+  ],
+  "author": "Oliver Fischer <ofischer@v-welten.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OliverFischer/v-welten-ticketing/issues"
+  },
+  "homepage": "https://github.com/OliverFischer/v-welten-ticketing#readme"
+}

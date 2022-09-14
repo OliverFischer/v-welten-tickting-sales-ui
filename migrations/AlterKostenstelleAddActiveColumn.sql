@@ -1,0 +1,1 @@
+alter table kostenstelle add DELETED bit null default 0;

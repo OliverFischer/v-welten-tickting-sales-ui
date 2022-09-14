@@ -1,0 +1,21 @@
+create view BuchbareVeranstaltungen as
+select
+    v.ID AS vId,
+    s.ID AS sId,
+    u.ID AS uId,
+    m.ID AS mId,
+    v.name AS vName,
+    s.name AS sName,
+    u.name AS uNAme,
+    m.name AS mNAme,
+    v.beschreibung AS vBeschreibung,
+    v.veranstaltungsdatum AS vDatum,
+    v.datum_steht_nicht_fest AS vBlnDatumIstFix,
+    s.VERANSTALTUNGSORT AS vOrt,
+    s.BESCHREIBUNG AS sBeschreibung
+from veranstaltung v, sponsoringaktivitaet s, unternehmen u, marke m
+where
+    v.SPONSORINGAKTIVITAET_ID = s.ID AND
+    s.MARKE_ID = m.ID AND
+    m.UNTERNEHMEN_ID = u.ID AND
+    v.VERANSTALTUNGSDATUM >= CURDATE();
