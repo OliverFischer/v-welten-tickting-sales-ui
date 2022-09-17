@@ -3,8 +3,9 @@
  */
 import { PrismaClient } from '@prisma/client'
 import crypto from "crypto";
+const logLevels = process.env.PRISMA_LOG_LEVELS ? process.env.PRISMA_LOG_LEVELS.split(',') : null
 const prisma = new PrismaClient({
-    log: ['query','error']
+    log: logLevels || ['query','error','info','warn']
 })
 
 const serializableData = any => JSON.parse(JSON.stringify(any))
