@@ -16,7 +16,7 @@ const TicketForm = ({kostenstellen, sitzkategorien, kartenkosten, formik, plaetz
             }else{
                 const kartenkontingent = plaetze.filter(platz => platz?.kartenkontingent?.sitzkategorie?.id === formik.values.sitzkategorie_id)[0].kartenkontingent // das sollte funktionieren
                 const personen = parseInt(formik.values.anzahlBesucher) + parseInt(formik.values.anzahlBetreuer)
-                console.log(personen)
+                //console.log(personen)
                 const cateringKosten = kartenkontingent?.kosten_catering * personen
                 const kartenkosten = kartenkontingent?.kosten_karte * personen
                 return `

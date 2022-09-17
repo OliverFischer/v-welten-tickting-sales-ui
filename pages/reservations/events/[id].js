@@ -91,7 +91,7 @@ export default function Reservation(props) {
     const handleNext = () => setActiveStep(activeStep + 1)
     const handleBack = () => setActiveStep(activeStep - 1)
 
-    console.log(userService.userValue)
+    //console.log(userService.userValue)
 
     const olliRecordFake = {
         vorname: 'Olli',
@@ -165,7 +165,7 @@ export default function Reservation(props) {
         if(Object.keys(validationResults).length == 0){
             await f.submitForm()
         }else{
-            console.log(f.values)
+            //console.log(f.values)
             console.error(validationResults)
         }
     }

@@ -4,7 +4,7 @@ export default async function handler(req, res){
 
     const userId = parseInt(req.query.userId)
     const {reservationIds} = req.body
-    console.log(req.body)
+    //console.log(req.body)
     // debug stuff, delete
     
     // 1. Check right method
@@ -28,7 +28,7 @@ export default async function handler(req, res){
         // main functional part
         try{
             const results = await deleteReservationsForUser(userId,reservationIds)    
-            console.log(results)   
+            //console.log(results)   
             res.status(200).json({
                 message: 'Delete (partially) successful',
                 reservationIds : results

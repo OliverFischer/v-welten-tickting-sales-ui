@@ -75,13 +75,13 @@ class Example extends React.Component {
             rowsPerPage: 10,
             rowsSelected: this.state.rowsSelected,
             onRowSelectionChange: (rowsSelectedData, allRows, rowsSelected) => {
-                console.log(rowsSelectedData, allRows, rowsSelected);
+                //console.log(rowsSelectedData, allRows, rowsSelected);
                 this.setState({ rowsSelected: rowsSelected });
             },
             onRowsDelete: (rowsDeleted, newData) => {
-                console.log('rowsDeleted');
-                console.dir(rowsDeleted);
-                console.dir(newData);
+                //console.log('rowsDeleted');
+                //console.dir(rowsDeleted);
+                //console.dir(newData);
                 if (rowsDeleted && rowsDeleted.data && rowsDeleted.data[0] && rowsDeleted.data[0].dataIndex === 0) {
                     window.alert('Can\'t delete this!');
                     return false;
@@ -90,7 +90,7 @@ class Example extends React.Component {
                     data: newData,
                     rowsSelected: []
                 });
-                console.log(rowsDeleted, "were deleted!");
+                //console.log(rowsDeleted, "were deleted!");
             },
             onChangePage: (numberRows) => {
                 console.log(numberRows);
