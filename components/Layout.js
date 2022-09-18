@@ -64,7 +64,7 @@ export const Layout = ({children}) => {
                             <span className={classes.tBarButtonText}>Reservierungen</span>
                         </Button>
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}/>
-                        <Button onClick={() => userService.logout()}><LogoutIcon/></Button>
+                        <Button onClick={() => userService.logout()}><LogoutIcon width={32} height={32}/></Button>
                     </Toolbar>
                 </AppBar>
             </Box>

@@ -20,7 +20,7 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import Image from 'next/image'
 import { userService } from '../services';
-import theme from './theme'
+import theme from '../services/theme'
 import PreviewModal from '../components/PreviewModal'
 
 

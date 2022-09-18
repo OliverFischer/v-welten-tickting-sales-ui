@@ -8,8 +8,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Layout from '../components/Layout'
 import {RouteGuard} from '../components/RouteGuard'
-import theme from './theme'
+import theme from '../services/theme'
 import './styles.css'
+
 
 export default function Ticketing(props) {
     const { Component, pageProps } = props;

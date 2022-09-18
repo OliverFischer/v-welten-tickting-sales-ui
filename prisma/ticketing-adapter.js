@@ -129,7 +129,7 @@ export const getPositionen = async () => {
  * @returns {Promise<Array>}
  */
 export const getUserReservierungen = async (userId, date = new Date()) => { //TODO: fixes Datum wegnehmen!!
-    console.log(userId)
+    
     const rawUserReservierungen = await prisma.reservierung.findMany({
         where:{
             aussendienstmitarbeiter_id: userId,

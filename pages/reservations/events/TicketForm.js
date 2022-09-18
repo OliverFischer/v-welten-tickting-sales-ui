@@ -108,6 +108,7 @@ const TicketForm = ({kostenstellen, sitzkategorien, kartenkosten, formik, plaetz
                         label="Anzahl Besucherkarten"
                         fullWidth
                         variant="standard"
+                        type="number"
                         value={formik.values.anzahlBesucher}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -123,6 +124,7 @@ const TicketForm = ({kostenstellen, sitzkategorien, kartenkosten, formik, plaetz
                         label="Anzahl Betreuerkarten"
                         fullWidth
                         variant="standard"
+                        type="number"
                         value={formik.values.anzahlBetreuer}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

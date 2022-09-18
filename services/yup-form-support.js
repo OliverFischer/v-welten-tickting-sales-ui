@@ -24,7 +24,7 @@ setLocale({
 })
 
 // validation schema for our form
-export default validationSchema = Yup.object({
+export const validationSchema = Yup.object({
     vorname: Yup
         .string()
         .required('Bitte den Vornamen des Besuchers eingeben'),

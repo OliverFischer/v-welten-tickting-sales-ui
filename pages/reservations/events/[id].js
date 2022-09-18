@@ -16,7 +16,7 @@ import TicketForm from './TicketForm';
 import VisitorForm from './VisitorForm';
 import {getKostenstellen, getPositionen, getUpcomingEvent} from '../../../prisma/ticketing-adapter'
 import { useFormik } from 'formik';
-import {validationSchema} from './yup-form-support'
+import {validationSchema} from '../../../services/yup-form-support'
 import { userService } from '../../../services';
 
 function Copyright() {
@@ -116,7 +116,7 @@ export default function Reservation(props) {
         aussendienstmitarbeiter_id : userService.userValue.id
     }
 
-    const emptyRecordFake = {
+    const emptyRecord = {
         vorname: '',
         nachname: '',
         strasse: '',
@@ -124,9 +124,9 @@ export default function Reservation(props) {
         wohnort: '',
         firma: '',
         objektnummer: '',
-        plz : '21077',
+        plz : '',
 
-        anzahlBesucher: 0,
+        anzahlBesucher: 1,
         anzahlBetreuer: 0,
         kostenstelle: null,
         kostenstelle_id : null,
@@ -140,7 +140,7 @@ export default function Reservation(props) {
 
     // Formik integration
     const formik = useFormik({
-        initialValues : olliRecordFake,
+        initialValues : emptyRecord,
         validationSchema,
         onSubmit: async (values) => {
             // was ist mit Valiierungsfehlern auf der letzen Seite?
