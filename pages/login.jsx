@@ -21,6 +21,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import Image from 'next/image'
 import { userService } from '../services';
 import theme from './theme'
+import PreviewModal from '../components/PreviewModal'
+
 
 export default Login;
 
@@ -90,16 +92,16 @@ function Login() {
                     padding: '20px'
                 }}
             >
-            <div style={{height:'100px'}}>
-                <div style={{color: '#FF0000'}}>
-                    <Image
-                        width={172}
-                        height={60}
-                        src="/logo.jpeg"
-                    />
+                <div style={{height:'100px'}}>
+                    <div style={{color: '#FF0000'}}>
+                        <Image
+                            width={172}
+                            height={60}
+                            src="/logo.jpeg"
+                        />
+                    </div>
                 </div>
-            </div>
-                
+                <PreviewModal/>
                 <Typography component="h3" variant="h5" color="primary.main">
                     <b>CARLSBERG TICKETING</b>
                 </Typography>
@@ -144,7 +146,6 @@ function Login() {
                 <br/>
                 <Copyright sx={{ mt: 8, mb: 4 }} />
             </Box>
-            
         </Container>
     </ThemeProvider>
     );
