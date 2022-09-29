@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import * as React from 'react';
 import FormControl from "@mui/material/FormControl";
 import Autocomplete from "@mui/material/Autocomplete";
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 const VisitorForm = ({positionen, formik}) =>{
     return (
@@ -148,6 +149,20 @@ const VisitorForm = ({positionen, formik}) =>{
                         helperText={formik.touched.wohnort && formik.errors.wohnort}
                     />
                 </Grid>
+                <Grid item xs={12} sm={12}>
+                    <TextField
+                        rows={4}
+                        multiline
+                        placeholder="Einladungsgrund"
+                        id="einladungsgrund"
+                        name="einladungsgrund"
+                        label="Einladungsgrund"
+                        fullWidth
+                        value={formik.values.einladungsgrund}
+                        onChange={formik.handleChange}
+                        />
+                </Grid>
+                
             </Grid>
         </React.Fragment>
     )

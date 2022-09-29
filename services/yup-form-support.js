@@ -56,6 +56,7 @@ export const validationSchema = Yup.object({
         .positive('Die Anzahl muss größer 0 sein')
         .min(0)
         .required('Bitte die Anzahl der Betreuerkarten angeben'),
+    einladungsgrund: Yup.string(),    
     // position: Yup
     //     .string()
     //     .required('Bitte eine Position auswählen'),

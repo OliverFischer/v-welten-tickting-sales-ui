@@ -234,6 +234,7 @@ const prepareInsertDataForNewBesucher = data => {
                 id: position_id,
             }
         }}
+        
     const besucherInsertData = {
         ...besucherData,
         erzeugt_am
@@ -254,13 +255,14 @@ const prepareInsertDataForNewReservation = data => {
     const reservierung_eingegangen_am = erzeugt_am
     
 
-    const {anzahlBesucher, anzahlBetreuer,kostenstelle_id,sitzkategorie_id,veranstaltung_id, aussendienstmitarbeiter_id} = data
+    const {anzahlBesucher, anzahlBetreuer,kostenstelle_id,sitzkategorie_id,veranstaltung_id, aussendienstmitarbeiter_id, einladungsgrund} = data
     let reservierungData = {
         anzahl_besucher_karten : anzahlBesucher, 
         anzahl_betreuer_karten : anzahlBetreuer,
         kostenstelle_id,
         sitzkategorie_id,
         veranstaltung_id,
+        einladungsgrund,
         gebucht,
         zu_absage_per_mail_verschickt,
         optlock

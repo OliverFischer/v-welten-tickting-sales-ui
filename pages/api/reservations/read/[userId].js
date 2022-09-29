@@ -25,7 +25,8 @@ const visitor = v => `${v.anrede} ${v.vorname} ${v.nachname}, von Firma :  ${v.f
                 eventName : rawReservation?.veranstaltung?.name,
                 eventDate : dateAsString(rawReservation?.veranstaltung?.veranstaltungsdatum),
                 tickets : tickets(rawReservation),
-                visitor : visitor(rawReservation.besucher)
+                visitor : visitor(rawReservation.besucher),
+                invitationCause: rawReservation.einladungsgrund
             })
             data.push(rawReservation?.veranstaltung?.name) // search column
             data.push(rawReservation.id) // reservationId

@@ -43,6 +43,7 @@ const columns = [{
                     <div>Datum : {value.eventDate}</div>
                     <div>Karten : {value.tickets}</div>
                     <div>{value.visitor}</div>
+                    <div>{value.invitationCause}</div>
                 </Box>
             )
         }

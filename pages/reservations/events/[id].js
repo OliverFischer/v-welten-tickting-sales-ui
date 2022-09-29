@@ -103,6 +103,7 @@ export default function Reservation(props) {
         firma: 'V-Welten',
         objektnummer: '47110815',
         plz : '21077',
+        einladungsgrund: '',
 
         anzahlBesucher: 3,
         anzahlBetreuer: 4,
@@ -125,6 +126,7 @@ export default function Reservation(props) {
         firma: '',
         objektnummer: '',
         plz : '',
+        einladungsgrund: '',
 
         anzahlBesucher: 1,
         anzahlBetreuer: 0,
