@@ -1,3 +1,4 @@
+use ticketing;
 -- we add a new property deleted to exclude the redundant kostenstellen
 alter table kostenstelle add DELETED bit null default 0;
 -- we add a new logo url to display the brand of the event

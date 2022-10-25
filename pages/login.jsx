@@ -21,7 +21,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Image from 'next/image'
 import { userService } from '../services';
 import theme from '../services/theme'
-import PreviewModal from '../components/PreviewModal'
+//import PreviewModal from '../components/PreviewModal'
 
 
 export default Login;
@@ -101,7 +101,6 @@ function Login() {
                         />
                     </div>
                 </div>
-                <PreviewModal/>
                 <Typography component="h3" variant="h5" color="primary.main">
                     <b>CARLSBERG TICKETING</b>
                 </Typography>

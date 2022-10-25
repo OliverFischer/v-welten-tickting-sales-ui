@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 export async function getServerSideProps({ params }){
 
     const dateAsString = date => isEmpty(date) ? 'Termin unbekannt' : date.split('T')[0].split('-').reverse().join('.')
-    const rawEvents = await getUpcomingEvents()
+    const rawEvents = await getUpcomingEvents(new Date(2022,10,15))
     const getKartenText = kontingente => {
         let text = ``
         kontingente.forEach(kontingent => {
