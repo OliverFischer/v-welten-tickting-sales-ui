@@ -33,10 +33,33 @@ export const isEmpty = (value,allowEmptyString) => (value == null) || (!allowEmp
  */
 export const dateAsString = date => isEmpty(date) ? 'Termin unbekannt' : date
 
+export const getBookedReservations = async (date = new Date()) => {
+    const rawReservations = await prisma.reservierung.findMany({
+        where:{
+            veranstaltung : {
+                veranstaltungsdatum : {
+                    gt : date
+                }
+            },
+            gebucht: {
+                equals : true
+            }
+        },
+        include: {
+            veranstaltung : {
+                select: {
+                    id : true
+                }
+            }
+        }
+    })
+    return serializableData(rawReservations)
+}
+
 /**
  * Returns a list of all upcoming events in the database
  */
-export const getUpcomingEvents = async (date = new Date()) => {
+export const getAllUpcomingEvents = async (date = new Date()) => {
     const rawEvents = await prisma.veranstaltung.findMany({
         where: {
             veranstaltungsdatum : {
@@ -62,6 +85,24 @@ export const getUpcomingEvents = async (date = new Date()) => {
         orderBy:[{veranstaltungsdatum: 'asc'}]
     })
     return serializableData(rawEvents)
+}
+
+/**
+ * Returns a list of all upcoming events which are not booked so far
+ * @param {Date} date 
+ */
+export const getUpcomingEvents = async (date = new Date()) => {
+    // get a list of all (unfiltered) events from start date
+    const allEvents = await getAllUpcomingEvents(date)
+    // get a list of reservations containing booked events from start date 
+    const yetBookedEvents = await getBookedReservations(date)
+
+    // we only need the eventids to filter the list
+    const bookedEventIds = yetBookedEvents.map(event => event.veranstaltung_id)
+    // shrink the allEvents list by those events already booked
+    const filteredEvents = allEvents.filter(event => !(bookedEventIds.indexOf(event.id)>-1))
+
+    return filteredEvents
 }
 
 
