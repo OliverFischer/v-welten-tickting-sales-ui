@@ -267,7 +267,7 @@ const prepareInsertDataForNewBesucher = data => {
     let besucherData = {vorname, nachname,strasse, hausnummer,
         ort : wohnort,
         firma,
-        anrede : 'Herr/Frau',
+        anrede : 'Herr',
         objekt_nummer : objektnummer,
         plz : parseInt(plz),
         position: {
