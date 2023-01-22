@@ -4,6 +4,7 @@
 import { PrismaClient } from '@prisma/client'
 import crypto from "crypto";
 const logLevels = process.env.PRISMA_LOG_LEVELS ? process.env.PRISMA_LOG_LEVELS.split(',') : null
+console.log(logLevels)
 const prisma = new PrismaClient({
     log: logLevels || ['query','error','info','warn']
 })

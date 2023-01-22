@@ -15,7 +15,10 @@ const visitor = v => `${v.anrede} ${v.vorname} ${v.nachname}, von Firma :  ${v.f
  export default async function handler(req, res){
     
     const userId = parseInt(req.query.userId)
-    const rawReservations = await getUserReservierungen(userId, new Date())
+    // to enable the user to also see the reservations from the past, we start 
+    // showing the reservations by the first of January two years before. 
+    const currentYear = new Date().getFullYear()
+    const rawReservations = await getUserReservierungen(userId, new Date(currentYear-2,0,1))
     const reservations = rawReservations
         .filter(rawReservation => rawReservation != null)
         .map(rawReservation => {
@@ -26,7 +29,8 @@ const visitor = v => `${v.anrede} ${v.vorname} ${v.nachname}, von Firma :  ${v.f
                 eventDate : dateAsString(rawReservation?.veranstaltung?.veranstaltungsdatum),
                 tickets : tickets(rawReservation),
                 visitor : visitor(rawReservation.besucher),
-                invitationCause: rawReservation.einladungsgrund
+                invitationCause: rawReservation.einladungsgrund,
+                booked: rawReservation.gebucht
             })
             data.push(rawReservation?.veranstaltung?.name) // search column
             data.push(rawReservation.id) // reservationId
