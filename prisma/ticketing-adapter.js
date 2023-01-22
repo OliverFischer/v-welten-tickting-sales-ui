@@ -165,7 +165,7 @@ export const getPositionen = async () => {
 }
 
 /**
- * Returns a list of reservations for the current user
+ * Returns a list of reservations (booked and unbooked) for the current user
  * @param userId
  * @param date
  * @returns {Promise<Array>}
@@ -179,9 +179,6 @@ export const getUserReservierungen = async (userId, date = new Date()) => { //TO
                 veranstaltungsdatum : {
                     gt : date
                 }
-            },
-            gebucht: {
-                equals : false
             }
         },
         include: {
