@@ -37,7 +37,7 @@ const columns = [{
     options: {
         filter : false,
         customBodyRender: (value) => {
-            const bookingStatus = value.booked?'Die Reservierung wurde bestätigt!' : 'Die Reservierung wurde noch nicht bestätigt.'
+            const bookingStatus = value.booked?'Die Reservierung wurde bestätigt!' : 'Die Reservierung wurde nicht bestätigt.'
             return (
                 <Box sx={{color: '#284A41'}}>
                     <div><b>{value.eventName}</b></div>

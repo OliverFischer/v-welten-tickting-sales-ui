@@ -4,7 +4,7 @@ import {getUserReservierungen, isEmpty} from '../../../../prisma/ticketing-adapt
 
 const dateAsString = date => isEmpty(date) ? 'Termin unbekannt' : date.split('T')[0].split('-').reverse().join('.')
 const tickets = r => `${r.anzahl_besucher_karten}x Besucher & ${r.anzahl_betreuer_karten > 0 ? r.anzahl_betreuer_karten + 'x' : 'kein(e)'} Betreuer`
-const visitor = v => `${v.anrede} ${v.vorname} ${v.nachname}, von Firma :  ${v.firma}`
+const visitor = v => `${v.vorname} ${v.nachname}, von Firma :  ${v.firma}`
 
 /**
  * Returns the reservations for a user.
